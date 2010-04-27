@@ -1,0 +1,15 @@
+.tab {
+	color: black;
+	background: #f2efe9;
+	border-top: 5px solid #A00;
+	padding: 5px 10px 5px 10px;
+	font-family: sans-serif;
+}
+
+.tab:hover {
+	border-top: 5px solid #FA0;
+}
+
+body {
+        background: #cccccc;
+}
