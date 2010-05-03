@@ -213,20 +213,10 @@ new OpenLayers.Control.Permalink('sketchlink', 'http://latlon.org/sketch'),
             var opnv = new OpenLayers.Layer.OSM("&Ouml;pnv Deutschland", "http://tile.xn--pnvkarte-m4a.de/tilegen/${z}/${x}/${y}.png", {numZoomLevels: 19,displayInLayerSwitcher:true,buffer:0});
 
 
-
-
-
-
-
-
-
-
-
-
             // create a vector layer for drawing
             vector = new OpenLayers.Layer.Vector("Editable Vectors");
             
-            map.addLayers([mapnik,  yasat, irs, yahoosat, hyb, vector]);
+            map.addLayers([mapnik, bel, yasat, irs, yahoosat, hyb, vector]);
             var ls = new OpenLayers.Control.LayerSwitcher();
             map.addControl(ls);
             ls.maximizeControl();
