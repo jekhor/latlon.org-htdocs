@@ -47,7 +47,7 @@ if (!is_null($_GET["gpx_url"]) && ($_GET["gpx_url"] != "")) {
 			map.addLayer(layerTilesAtHome);
 			layerCycleMap = new OpenLayers.Layer.OSM.CycleMap("CycleMap");
 			map.addLayer(layerCycleMap);
-			layerGenshtab = new OpenLayers.Layer.WMS("Genshtab WMS", "http://wms.latlon.org/cgi-bin/ms", {layers: "GS-100k-N-34,GS-100k-N-35,GS-100k-N-36"}, {projection: new OpenLayers.Projection("EPSG:3857")});
+			layerGenshtab = new OpenLayers.Layer.WMS("Genshtab 1 km", "http://ms.latlon.org/ms", {layers: "GS-100k-N-34,GS-100k-N-35,GS-100k-N-36"}, {projection: new OpenLayers.Projection("EPSG:3857")});
 			map.addLayer(layerGenshtab);
 //			layerMarkers = new OpenLayers.Layer.Markers("Markers");
 //			map.addLayer(layerMarkers);
@@ -55,7 +55,7 @@ if (!is_null($_GET["gpx_url"]) && ($_GET["gpx_url"] != "")) {
 // Add the Layer with GPX Track
 			var lgpx = new OpenLayers.Layer.GML("GPX track", "get_gpx.php?gpx_url=<?php echo urlencode($_GET["gpx_url"]) ?>", {
   format: OpenLayers.Format.GPX,
-  style: {strokeColor: "green", strokeWidth: 5, strokeOpacity: 0.5},
+  style: {strokeColor: "red", strokeWidth: 5, strokeOpacity: 0.6},
   projection: new OpenLayers.Projection("EPSG:4326")
 });
 map.addLayer(lgpx);
