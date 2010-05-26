@@ -132,6 +132,7 @@ new OpenLayers.Control.Permalink('sketchlink', 'http://latlon.org/sketch'),
             var pt = new OpenLayers.Layer.TMS("Public Transport", "http://tile.latlon.org/pt/", {  numZoomLevels: 18,  isBaseLayer: false,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true, visibility: true });
             //var opnv = new OpenLayers.Layer.TMS("öpnvkarte.de", "http://tile.xn--pnvkarte-m4a.de/tilegen/", {   isBaseLayer: true,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true});
             var opnv = new OpenLayers.Layer.OSM("&Ouml;pnv Deutschland", "http://tile.xn--pnvkarte-m4a.de/tilegen/${z}/${x}/${y}.png", {numZoomLevels: 19,displayInLayerSwitcher:true,buffer:0});
+            var navdebug = new OpenLayers.Layer.OSM("Navigation Debug", "http://ec2-184-73-15-218.compute-1.amazonaws.com/6700/256/${z}/${x}/${y}.png", {numZoomLevels: 18,displayInLayerSwitcher:true,buffer:0});
 //var navitel = new OpenLayers.Layer.OSM("Navitel", "http://tile.xn--pnvkarte-m4a.de/tilegen/${z}/${x}/${y}.png", {numZoomLevels: 19,displayInLayerSwitcher:false,buffer:0});
             var navitel = new OpenLayers.Layer.TMS("Navitel", "http://map.navitel.su/navitms.fcgi?t=", {  isBaseLayer: true,  type: 'png', getURL: osmn_getTileURL, displayOutsideMaxExtent: true});
 
@@ -139,7 +140,7 @@ new OpenLayers.Control.Permalink('sketchlink', 'http://latlon.org/sketch'),
             // create a vector layer for drawing
             //var vector = new OpenLayers.Layer.Vector("Editable Vectors");
 
-            map.addLayers([gsat, yasat, irs, bel, navitel, yahoosat, opnv, mapnik, gmap, ghyb, road, pt, hyb]);
+            map.addLayers([gsat, yasat, irs, bel, navitel, yahoosat, opnv, mapnik, gmap, ghyb, road, navdebug, pt, hyb]);
             var ls = new OpenLayers.Control.LayerSwitcher();
             map.addControl(ls);
             ls.maximizeControl();
