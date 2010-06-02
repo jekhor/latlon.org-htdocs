@@ -15,11 +15,36 @@ if (!is_null($_GET["gpx_url"]) && ($_GET["gpx_url"] != "")) {
 
 <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
 <script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
+<script src="proj4js/proj4js-compressed.js"></script>
 
 	<script type="text/javascript">
 		var map;
 
+		// avoid pink tiles
+        OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
+        OpenLayers.Util.onImageLoadErrorColor = "transparent";
+
+        function osm_getTileURL(bounds)
+    {
+      var res = this.map.getResolution();
+      var x = Math.round((bounds.left - this.maxExtent.left) / (res * this.tileSize.w));
+      var y = Math.round((this.maxExtent.top - bounds.top) / (res * this.tileSize.h));
+      var z = this.map.getZoom();
+      var limit = Math.pow(2, z);
+
+      if (y < 0 || y >= limit)
+      {
+        return OpenLayers.Util.getImagesLocation() + "404.png";
+      }
+      else
+      {
+        x = ((x % limit) + limit) % limit;
+        return this.url + "x=" + x + "&y=" + y + "&z=" + z;
+      }
+    }
+ 
 		function init() {
+			Proj4js.defs["EPSG:3857"]= "+title= Google Mercator EPSG:3857 +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
 			permalink = new OpenLayers.Control.Permalink();
 			permalink.displayProjection = new OpenLayers.Projection("EPSG:4326");
 			map = new OpenLayers.Map ("map", {
@@ -28,7 +53,7 @@ if (!is_null($_GET["gpx_url"]) && ($_GET["gpx_url"] != "")) {
 					new OpenLayers.Control.PanZoomBar(),
 					new OpenLayers.Control.LayerSwitcher(),
 					new OpenLayers.Control.Attribution(),
-					new OpenLayers.Control.Permalink()
+					permalink
 					],
 
 				maxExtent: new OpenLayers.Bounds(-20037508.34,-20037508.34,20037508.34,20037508.34),
@@ -48,6 +73,7 @@ if (!is_null($_GET["gpx_url"]) && ($_GET["gpx_url"] != "")) {
 			layerCycleMap = new OpenLayers.Layer.OSM.CycleMap("CycleMap");
 			map.addLayer(layerCycleMap);
 			layerGenshtab = new OpenLayers.Layer.WMS("Genshtab 1 km", "http://ms.latlon.org/ms", {layers: "GS-100k-N-34,GS-100k-N-35,GS-100k-N-36"}, {projection: new OpenLayers.Projection("EPSG:3857")});
+//			layerGenshtab = new OpenLayers.Layer.TMS("Genshtab 1 km", "http://wms.latlon.org/?request=GetTile&layers=gshtab&", {  numZoomLevels: 18,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true, visibility: true });
 			map.addLayer(layerGenshtab);
 //			layerMarkers = new OpenLayers.Layer.Markers("Markers");
 //			map.addLayer(layerMarkers);
