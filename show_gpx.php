@@ -13,6 +13,8 @@ if (is_null($_GET["gpx_url"]) || ($_GET["gpx_url"] == "")) {
 if (!is_null($_GET["gpx_url"]) && ($_GET["gpx_url"] != "")) {
 ?>
 
+	<script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA4RJuqz7pcsqYdE-UgSNCLhTDHWCCDaHhpyCQHbdxzVfRMRQXlBSD1sB3MWEn0zedSC-AoQn7vamynw'></script>
+    <script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
 <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
 <script src="http://www.openstreetmap.org/openlayers/OpenStreetMap.js"></script>
 <script src="proj4js/proj4js-compressed.js"></script>
@@ -66,15 +68,20 @@ if (!is_null($_GET["gpx_url"]) && ($_GET["gpx_url"] != "")) {
 
 			layerMapnik = new OpenLayers.Layer.OSM.Mapnik("Mapnik");
 			map.addLayer(layerMapnik);
+
 			osm_be = new OpenLayers.Layer.OSM("Беларуская", "http://tile.latlon.org/tiles/${z}/${x}/${y}.png", {numZoomLevels: 19,displayInLayerSwitcher:true,buffer:0});
 			map.addLayer(osm_be);
-			layerTilesAtHome = new OpenLayers.Layer.OSM.Osmarender("Osmarender");
-			map.addLayer(layerTilesAtHome);
-			layerCycleMap = new OpenLayers.Layer.OSM.CycleMap("CycleMap");
-			map.addLayer(layerCycleMap);
+
+			gsat = new OpenLayers.Layer.Google(
+				"Google Satellite",
+				{type: G_SATELLITE_MAP, 'sphericalMercator': true, numZoomLevels: 22}
+			);
+			map.addLayer(gsat);
+
 			layerGenshtab = new OpenLayers.Layer.WMS("Genshtab 1 km", "http://ms.latlon.org/ms", {layers: "GS-100k-N-34,GS-100k-N-35,GS-100k-N-36"}, {projection: new OpenLayers.Projection("EPSG:3857")});
 //			layerGenshtab = new OpenLayers.Layer.TMS("Genshtab 1 km", "http://wms.latlon.org/?request=GetTile&layers=gshtab&", {  numZoomLevels: 18,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true, visibility: true });
 			map.addLayer(layerGenshtab);
+
 //			layerMarkers = new OpenLayers.Layer.Markers("Markers");
 //			map.addLayer(layerMarkers);
  
