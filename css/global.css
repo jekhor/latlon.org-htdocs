@@ -74,14 +74,6 @@ body {
     background: #cccccc;
 }
 
-.olControlLayerSwitcher {
-    top: 55px !important;
-}
-
-.olControlAttribution {
-    bottom: 0px !important;
-}
-
 .olControlEditingToolbar div {
     width: 25px !important;
 }
@@ -146,4 +138,14 @@ body {
 #sidebar_content {
     padding: 5px;
 }
+
+.olControlLayerSwitcher {
+    top: 55px !important;
+}
+
+.olControlAttribution {
+    bottom: 0px !important;
+    left: 0 !important;
+}
+
 
