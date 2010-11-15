@@ -128,9 +128,12 @@ new OpenLayers.Control.Permalink('sketchlink', 'http://latlon.org/sketch'),
 
             //var gshtab = new OpenLayers.Layer.TMS("BY Genshtab 100k", "http://wms.play.latlon.org/?request=GetTile&layers=gshtab&", {  numZoomLevels: 19,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
             var irs = new OpenLayers.Layer.TMS("kosmosnimki.ru IRS retiling + yahoo", "http://wms.latlon.org/?request=GetTile&layers=yhsat,irs&force=noblend&", {  numZoomLevels: 16,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
+            var spot_by = new OpenLayers.Layer.TMS("kosmosnimki.ru SPOT (Belarus)", "http://wms.latlon.org/?request=GetTile&layers=spot&", {  numZoomLevels: 17,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
 	    var layerGenshtab = new OpenLayers.Layer.TMS("Genshtab 1 km", "http://wms.latlon.org/?request=GetTile&layers=gshtab&", {  numZoomLevels: 18,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true, visibility: true });
             var hyb = new OpenLayers.Layer.TMS("Mapsurfer OSM Hybrid", "http://tiles3.mapsurfer.net/tms_h.ashx?", {  numZoomLevels: 19,  isBaseLayer: false,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true, visibility: true });
             var pt = new OpenLayers.Layer.TMS("Public Transport", "http://tile.latlon.org/pt/", {  numZoomLevels: 18,  isBaseLayer: false,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true, visibility: true });
+            var tc = new OpenLayers.Layer.TMS("Traffic Calming", "http://91.208.39.18/cops/", {  numZoomLevels: 19,  isBaseLayer: false,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true, visibility: true });
+
             //var opnv = new OpenLayers.Layer.TMS("öpnvkarte.de", "http://tile.xn--pnvkarte-m4a.de/tilegen/", {   isBaseLayer: true,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true});
             var opnv = new OpenLayers.Layer.OSM("&Ouml;pnv Deutschland", "http://tile.xn--pnvkarte-m4a.de/tilegen/${z}/${x}/${y}.png", {numZoomLevels: 19,displayInLayerSwitcher:true,buffer:0});
             var navdebug = new OpenLayers.Layer.OSM("Navigation Debug", "http://ec2-184-73-15-218.compute-1.amazonaws.com/6700/256/${z}/${x}/${y}.png", {numZoomLevels: 18,displayInLayerSwitcher:true,buffer:0});
@@ -141,7 +144,7 @@ new OpenLayers.Control.Permalink('sketchlink', 'http://latlon.org/sketch'),
             // create a vector layer for drawing
             //var vector = new OpenLayers.Layer.Vector("Editable Vectors");
 
-            map.addLayers([gsat, yasat, irs, bel, layerGenshtab, navitel, yahoosat, opnv, mapnik, gmap, ghyb, road, navdebug, pt, hyb]);
+            map.addLayers([gsat, yasat, irs, spot_by, bel, layerGenshtab, navitel, yahoosat, opnv, mapnik, gmap, ghyb, road, navdebug, pt, tc, hyb]);
             var ls = new OpenLayers.Control.LayerSwitcher();
             map.addControl(ls);
             ls.maximizeControl();
