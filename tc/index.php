@@ -4,7 +4,7 @@
     <head>
         <title>LatLon.org &mdash; Traffic calming map</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link rel="stylesheet" href="style.css" type="text/css" />
+        <link rel="stylesheet" href="/css/style.css" type="text/css" />
         <link rel="stylesheet" href="/css/global.css" type="text/css" />
 
         <script src="http://www.openlayers.org/api/OpenLayers.js" type="text/javascript"></script>

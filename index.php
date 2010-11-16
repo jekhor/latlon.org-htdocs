@@ -2,8 +2,9 @@
       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
-        <title>LatLon.org &mdash; Traffic calming map</title>
+        <title>LatLon.org</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <link rel="stylesheet" href="/css/style.css" type="text/css" />
         <link rel="stylesheet" href="/css/global.css" type="text/css" />
 
         <script src="http://www.openlayers.org/api/OpenLayers.js" type="text/javascript"></script>
