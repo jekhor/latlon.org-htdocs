@@ -15,7 +15,7 @@
     </head>
     <body onload="init()">
         <?include ("../top.ng.php"); ?>
-        <div id="sorry">New bumps can be added on zoom 17 or greater<br/>This site is still work-in-progress</div>
+        <!-- div id="sorry" class="hidden">New bumps can be added on zoom level 17 or greater<br/>More info can be found <a href='http://blog.latlon.org/2010/11/16/otmetki-o-lezhachikh-policejjskikh-v-osm/'>here</a></div -->
         <div id="content">
             <div id="sidebar" class="hidden">
               <div class="sidebar_title">

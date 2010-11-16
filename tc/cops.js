@@ -38,6 +38,7 @@ function osbug_makeform() {
         //label.for = "speedcam";
         label.appendChild(document.createTextNode(OpenLayers.i18n("Speedcam")));
         el2.appendChild(label);
+        el2.appendChild(document.createElement("br"));
         var calmType2 = document.createElement("input");
         calmType2.id = "bump";
         calmType2.value = "bump";
@@ -47,6 +48,17 @@ function osbug_makeform() {
         label = document.createElement("label");
         //label.for = "bump";
         label.appendChild(document.createTextNode(OpenLayers.i18n("Bump")));
+        el2.appendChild(label);
+        el2.appendChild(document.createElement("br"));
+        var calmType3 = document.createElement("input");
+        calmType3.id = "bug";
+        calmType3.value = "bug";
+        calmType3.type = "radio";
+        calmType3.name = "type";
+        el2.appendChild(calmType3);
+        label = document.createElement("label");
+        //label.for = "bump";
+        label.appendChild(document.createTextNode(OpenLayers.i18n("Something's wrong")));
         el2.appendChild(label);
         el1.appendChild(el2);
 
@@ -63,6 +75,9 @@ function osbug_makeform() {
             if (osb.osbLayer.username != null) {
                 osb.osbLayer.usernameshort = osb.osbLayer.username.replace("@latlon.org/tc","");
             }
+        }
+        if (osb.osbLayer.usernameshort == "NoName") {
+            osb.osbLayer.usernameshort = OpenLayers.i18n("NoName");
         }
         inputUsername.className = "osbUsername";
         inputUsername.id = "osbuser";
@@ -91,10 +106,14 @@ function osbug_makeform() {
         $("osbuser").value = osb.osbLayer.usernameshort;
         $("saybtn").onclick = function() {
             var l = popup.lonlat;
-            var t = "(unknown) ";
+            var t = "(error) ";
             if ($("speedcam").checked) t = "(speedcam) ";
             if ($("bump").checked) t = "(bump) ";
             l.transform(map.projection,map.displayProjection)
+            /* if ($("osbuser").value == "NoName") {
+                alert(OpenLayers.i18n("Please fill in your name"));
+                return false;
+            } */
             osb.osbLayer.setUserName($("osbuser").value + "@latlon.org/tc");
             osb.osbLayer.usernameshort = $("osbuser").value;
             osb.osbLayer.createBug(l, t + $("osbtext").value);
@@ -248,6 +267,11 @@ function init() {
 
     window.onload = handleResize;
     window.onresize = handleResize;
+    
+    var sorry = document.createElement("div");
+    sorry.innerHTML = OpenLayers.i18n("New bumps can be added on zoom level 17 or greater<br/>More info can be found <a href='http://blog.latlon.org/2010/11/16/otmetki-o-lezhachikh-policejjskikh-v-osm/'>here</a>");
+    sorry.id = "sorry";
+    document.body.insertBefore(sorry, $("content"));
 }
 
 
@@ -257,6 +281,19 @@ OpenLayers.Lang.ru = OpenLayers.Util.extend(OpenLayers.Lang.ru, {
     "Bump": "Спящий полицейский",
     "Speedcam": "Камера",
     "Type:": "Вид:",
-    "Your name:": "Представьтесь:"
+    "Your name:": "Представьтесь:",
+    "NoName": "Кто-то",
+    "Please fill in your name": "Представьтесь, пожалуйста",
+    "Comment is required": "Впишите, пожалуйста, комментарий",
+    "Something's wrong": "Ошибка на карте",
+    "Description": "Описание",
+    "Comment": "Комментарий",
+    "Permalink": "Постоянная ссылка",
+    "Zoom": "Приблизить",
+    "Unresolved Error": "Неисправленная неточность",
+    "Comment/Close": "Изменить",
+    "Traffic Calming": "",
+    "Nickname": "Представьтесь",
+    "New bumps can be added on zoom level 17 or greater<br/>More info can be found <a href='http://blog.latlon.org/2010/11/16/otmetki-o-lezhachikh-policejjskikh-v-osm/'>here</a>": "Добавлять сведения можно только на максимальном уровне детализации<br/>Подробности <a href='http://blog.latlon.org/2010/11/16/otmetki-o-lezhachikh-policejjskikh-v-osm/'>здесь</a>"
 });
 
