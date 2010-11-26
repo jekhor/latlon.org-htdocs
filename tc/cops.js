@@ -237,7 +237,7 @@ function init() {
     //new OpenLayers.Layer.Markers("Cafés");
     markers = new OpenLayers.Layer.Markers("Markers");
 
-    var osbLayer = new OpenLayers.Layer.OpenStreetBugs("OpenStreetBugs");
+    var osbLayer = new OpenLayers.Layer.OpenStreetBugs("OpenStreetBugs", { permalinkURL: "http://latlon.org/tc/", theme: "/css/openstreetbugs.css"});
     osb = new OpenLayers.Control.OpenStreetBugs(osbLayer);
     map.addLayers([mapnik, cops, markers, osbLayer]);
     //map.addLayers([osbLayer]);
