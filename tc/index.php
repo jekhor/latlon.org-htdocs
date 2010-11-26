@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="/css/global.css" type="text/css" />
 
         <script src="http://www.openlayers.org/api/OpenLayers.js" type="text/javascript"></script>
-        <script type="text/javascript" src="http://osm.cdauth.eu/map/openstreetbugs.js"></script>
+        <script type="text/javascript" src="/js/openstreetbugs.js"></script>
         <script src="/js/lib.js" type="text/javascript"></script>
         <script src="/js/click.js" type="text/javascript"></script>
         <script src="cops.js" type="text/javascript"></script>
