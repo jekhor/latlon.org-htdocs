@@ -114,7 +114,7 @@ new OpenLayers.Control.Permalink('sketchlink', 'http://latlon.org/sketch'),
                 {type: G_HYBRID_MAP, 'sphericalMercator': true}
             );
 
-    var road = new OpenLayers.Layer.TMS("Mapsurfer Road", "http://tiles1.mapsurfer.net/tms_r.ashx?", {  numZoomLevels: 19, isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
+    var road = new OpenLayers.Layer.TMS("MapSurfer.NET Road", "http://tiles1.mapsurfer.net/tms_r.ashx?", {  numZoomLevels: 19, isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
             // create Yahoo layer
             var yahoosat = new OpenLayers.Layer.Yahoo(
                 "Yahoo Satellite",
@@ -130,9 +130,9 @@ new OpenLayers.Control.Permalink('sketchlink', 'http://latlon.org/sketch'),
             var irs = new OpenLayers.Layer.TMS("kosmosnimki.ru IRS retiling + yahoo", "http://wms.latlon.org/?request=GetTile&layers=yhsat,irs&force=noblend&", {  numZoomLevels: 16,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
             var spot_by = new OpenLayers.Layer.TMS("kosmosnimki.ru SPOT (Belarus)", "http://wms.latlon.org/?request=GetTile&layers=spot&", {  numZoomLevels: 17,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
 	    var layerGenshtab = new OpenLayers.Layer.TMS("Genshtab 1 km", "http://wms.latlon.org/?request=GetTile&layers=gshtab&", {  numZoomLevels: 18,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true, visibility: true });
-            var hyb = new OpenLayers.Layer.TMS("Mapsurfer OSM Hybrid", "http://tiles3.mapsurfer.net/tms_h.ashx?", {  numZoomLevels: 19,  isBaseLayer: false,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true, visibility: true });
+            var hyb = new OpenLayers.Layer.TMS("MapSurfer.NET OSM Hybrid", "http://tiles3.mapsurfer.net/tms_h.ashx?", {  numZoomLevels: 19,  isBaseLayer: false,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true, visibility: true });
             var pt = new OpenLayers.Layer.TMS("Public Transport", "http://tile.latlon.org/pt/", {  numZoomLevels: 18,  isBaseLayer: false,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true, visibility: true });
-            var tc = new OpenLayers.Layer.TMS("Traffic Calming", "http://91.208.39.18/cops/", {  numZoomLevels: 19,  isBaseLayer: false,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true, visibility: true });
+            var tc = new OpenLayers.Layer.TMS("Traffic Calming", "http://91.208.39.18/cops/", {  numZoomLevels: 19,  isBaseLayer: false,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true, visibility: false });
 
             //var opnv = new OpenLayers.Layer.TMS("öpnvkarte.de", "http://tile.xn--pnvkarte-m4a.de/tilegen/", {   isBaseLayer: true,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true});
             var opnv = new OpenLayers.Layer.OSM("&Ouml;pnv Deutschland", "http://tile.xn--pnvkarte-m4a.de/tilegen/${z}/${x}/${y}.png", {numZoomLevels: 19,displayInLayerSwitcher:true,buffer:0});
