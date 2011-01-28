@@ -2,23 +2,57 @@ var using_ie = (document.uniqueID && (!document.defaultView));
 
 var width_correction;
 
+var onsidebarclose;
+
 if (using_ie) {
     width_correction = 2;
 } else {
     width_correction = 0;
 }
 
+/*
+function tailcall(fn, args) {
+  setTimeout(function() {fn.apply(this, args)}, 0);
+};
+*/
+
+function tailthis() {
+  var fn = tail.caller;
+  var args = arguments;
+  setTimeout(function() {fn.apply(this, args)}, 0);
+};
+
 function foreach(arr, lambda) {
-    for (var i = arr.length - 1; i >= 0; i--) {
+    var l = arr.length;
+    for (var i = 0; i < l; i++) {
         lambda(arr[i]);
     }
 }
 
 function stringmap(s, pairs) {
-    for (var i = pairs.length - 1; i >= 0; i--) {
+    var l = pairs.length;
+    for (var i = 0; i < l; i++) {
         s = s.replace(pairs[i][0], pairs[i][1]);
     }
     return s;
+}
+
+function cond(predicate, i, e) {
+    if (predicate) {
+        return i;
+    } else {
+        return e;
+    }
+}
+
+function scond(predicate, i, e) {
+    if (predicate) {
+        if (i) return i;
+        else return "";
+    } else {
+        if (e) return e;
+        else return "";
+    }
 }
 
 function getStyle(element, style) {
@@ -44,33 +78,30 @@ function getStyle(element, style) {
 function openSidebar(options) {
     options = options || {};
 
-    if (onclose) {
-        onclose();
-        onclose = null;
+    if (onsidebarclose) {
+        onsidebarclose();
+        onsidebarclose = null;
     }
 
     if (options.title) { $("sidebar_title").innerHTML = options.title; }
     if (options.content) { $("sidebar_content").innerHTML = options.content; }
 
-    if (options.width) { $("sidebar").style.width = options.width; }
-    else { $("sidebar").style.width = "30%"; }
-
     $("sidebar").style.display = "block";
 
-    handleResize();
+    //handleResize();
 
-    onclose = options.onclose;
+    onsidebarclose = options.onclose;
 }
 
 function closeSidebar() {
-    $("sidebar").style.width = "0";
+    //$("sidebar").style.width = "0";
     $("sidebar").style.display = "none";
 
     handleResize();
 
-    if (onclose) {
-        onclose();
-        onclose = null;
+    if (onsidebarclose) {
+        onsidebarclose();
+        onsidebarclose = null;
     }
 }
 
