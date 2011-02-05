@@ -50,6 +50,7 @@ body {
     display: block; 
     background: #eeeeee;
     padding-left: 5px;
+    /*height: 5%;*/
     clear: both;
 }
 
@@ -66,6 +67,7 @@ body {
     height: 512px; 
     width: 0;
     font-family: sans-serif;
+    position: relative;
 }
 
 #sidebar_close {
@@ -74,9 +76,37 @@ body {
 }
 
 #sidebar_content {
-    padding: 5px;
+    padding-left: 5px;
+    overflow: auto;
+    height: 95%;
+    font-size: 9pt;
 }
 
+#transtable * {
+    border: 1px solid darkgrey;
+    font-size: 8pt;
+}
+
+#transtable a {
+    border: 0;
+    text-decoration: none;
+}
+
+#transtable a:hover {
+    text-decoration: underline;
+}
+
+#transtable tbody tr td {
+    height: 20px;
+    min-height: 20px;
+}
+
+#tagspopup {
+    background-color: white;
+    padding-right: 10pt;
+    overflow: auto;
+    font-size: 8pt;
+}
 
 .olControlLayerSwitcher {
     top: 55px !important;
@@ -115,4 +145,55 @@ h3 {
 .osb-description {
     font-family: sans-serif;
     font-size: 8pt;
+}
+
+.modifiedrow {
+    background-color: #eaf0f0;
+}
+
+.autorow {
+    background-color: #f9f9b0;
+}
+
+.savedrow {
+    background-color: #b0f9b0;
+}
+
+.nodeobj {
+    background: url("/images/node.png") no-repeat;
+    padding-left: 20px;
+}
+
+.wayobj {
+    background: url("/images/way.png") no-repeat;
+    padding-left: 20px;
+}
+
+.relationobj {
+    background: url("/images/relation.png") no-repeat;
+    padding-left: 20px;
+}
+
+.actionlink {
+    text-decoration: none;
+    border-bottom: 1px dashed;
+    font-size: 7pt;
+}
+
+.actionlink:hover {
+    text-decoration: none;
+    border-bottom: 0;
+    font-size: 7pt;
+}
+
+.maintagli {
+    font-weight: bold;
+}
+
+.tagli {
+    padding: 2px;
+}
+
+.tagli:hover {
+    background: #ccccff;
 }
