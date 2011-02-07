@@ -197,3 +197,9 @@ h3 {
 .tagli:hover {
     background: #ccccff;
 }
+
+#loginbox {
+    border: 1px solid;
+    margin: 5pt;
+    padding: 5pt;
+}
