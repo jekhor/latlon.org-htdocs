@@ -133,6 +133,7 @@ new OpenLayers.Control.Permalink('sketchlink', 'http://latlon.org/sketch'),
             var hyb = new OpenLayers.Layer.TMS("MapSurfer.NET OSM Hybrid", "http://tiles3.mapsurfer.net/tms_h.ashx?", {  numZoomLevels: 19,  isBaseLayer: false,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true, visibility: true });
             var pt = new OpenLayers.Layer.TMS("Public Transport", "http://tile.latlon.org/pt/", {  numZoomLevels: 18,  isBaseLayer: false,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true, visibility: true });
             var tc = new OpenLayers.Layer.TMS("Traffic Calming", "http://osmosnimki.ru/cops/", {  numZoomLevels: 19,  isBaseLayer: false,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true, visibility: false });
+            var belsn = new OpenLayers.Layer.OSM("Беларуская (kosmosnimki)", "http://osmosnimki.ru/kosmo-be/${z}/${x}/${y}.png", {isBaseLayer: true,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize"});
 
             //var opnv = new OpenLayers.Layer.TMS("öpnvkarte.de", "http://tile.xn--pnvkarte-m4a.de/tilegen/", {   isBaseLayer: true,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true});
             var opnv = new OpenLayers.Layer.OSM("&Ouml;pnv Deutschland", "http://tile.xn--pnvkarte-m4a.de/tilegen/${z}/${x}/${y}.png", {numZoomLevels: 19,displayInLayerSwitcher:true,buffer:0});
@@ -144,7 +145,7 @@ new OpenLayers.Control.Permalink('sketchlink', 'http://latlon.org/sketch'),
             // create a vector layer for drawing
             //var vector = new OpenLayers.Layer.Vector("Editable Vectors");
 
-            map.addLayers([gsat, yasat, irs, spot_by, bel, layerGenshtab, navitel, yahoosat, opnv, mapnik, gmap, ghyb, road, navdebug, pt, tc, hyb]);
+            map.addLayers([gsat, yasat, irs, spot_by, bel, layerGenshtab, navitel, yahoosat, opnv, mapnik, gmap, ghyb, road, navdebug, pt, tc, belsn, hyb]);
             var ls = new OpenLayers.Control.LayerSwitcher();
             map.addControl(ls);
             ls.maximizeControl();
