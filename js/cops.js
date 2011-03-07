@@ -209,7 +209,7 @@ function init() {
 
     map = new OpenLayers.Map('map', options);
     mapnik = new OpenLayers.Layer.OSM();
-    cops = new OpenLayers.Layer.OSM("Traffic calming", "http://91.208.39.18/cops/${z}/${x}/${y}.png", {numZoomLevels: 19,  isBaseLayer: false,  type: 'png', splayOutsideMaxExtent: true, visibility: true});
+    cops = new OpenLayers.Layer.OSM("Traffic calming", "http://osmosnimki.ru/cops/${z}/${x}/${y}.png", {numZoomLevels: 19,  isBaseLayer: false,  type: 'png', splayOutsideMaxExtent: true, visibility: true});
 
     //new OpenLayers.Layer.Markers("Cafés");
     markers = new OpenLayers.Layer.Markers("Markers");

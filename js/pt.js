@@ -59,7 +59,7 @@ function init() {
     mapnik = new OpenLayers.Layer.OSM();
     bel = new OpenLayers.Layer.OSM("Беларуская", "http://tile.latlon.org/tiles/${z}/${x}/${y}.png", {isBaseLayer: true,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize"});
     belpt = new OpenLayers.Layer.OSM("Public Transport (Belarus)", "http://tile.latlon.org/pt/${z}/${x}/${y}.png", {isBaseLayer: false,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize", visibility: false});
-    pt = new OpenLayers.Layer.OSM("Public Transport (World)", "http://91.208.39.18/pt/${z}/${x}/${y}.png", {isBaseLayer: false,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize", visibility: true});
+    pt = new OpenLayers.Layer.OSM("Public Transport (World)", "http://osmosnimki.ru/pt/${z}/${x}/${y}.png", {isBaseLayer: false,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize", visibility: true});
 
 
     map.addLayers([mapnik, bel, belpt, pt]);
