@@ -202,7 +202,7 @@ new OpenLayers.Control.Permalink('sketchlink', 'http://latlon.org/sketch'),
 
             // create OSM layer
             var mapnik = new OpenLayers.Layer.OSM();
-            var bel = new OpenLayers.Layer.TMS("Беларуская", "http://d.tile.latlon.org/tiles/", {   numZoomLevels: 18, isBaseLayer: true,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true });
+            var bel = new OpenLayers.Layer.TMS("Беларуская", "http://tile.latlon.org/tiles/", {   numZoomLevels: 18, isBaseLayer: true,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true });
             var yasat = new OpenLayers.Layer.TMS("yandex.ru retiling", "http://wms.latlon.org/?request=GetTile&layers=yasat&", {  numZoomLevels: 19,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
 
             var gshtab = new OpenLayers.Layer.TMS("BY Genshtab 100k", "http://wms.latlon.org/?request=GetTile&layers=gshtab&", {  numZoomLevels: 19,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
