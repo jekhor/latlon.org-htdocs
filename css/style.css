@@ -84,6 +84,7 @@ body {
 
 #transtable * {
     border: 1px solid darkgrey;
+    border-collapse: collapse;
     font-size: 8pt;
 }
 
