@@ -84,14 +84,39 @@ if (!is_null($_GET["gpx_url"]) && ($_GET["gpx_url"] != "")) {
 
 //			layerMarkers = new OpenLayers.Layer.Markers("Markers");
 //			map.addLayer(layerMarkers);
- 
+
+			var context = {
+				pointLabel: function(feature) {
+					return feature.attributes['name'] + " (" + feature.attributes['desc'] + ")";
+				}
+			};
+			var gpxStyle = new OpenLayers.StyleMap({
+				'default': new OpenLayers.Style({
+					strokeColor: 'red',
+					strokeWidth: 5,
+					strokeOpacity: 0.6,
+					pointRadius: 5,
+					fillColor: 'red',
+					label: "${pointLabel}",
+					labelYOffset: 15,
+					fontSize: "12px",
+					fontColor: "#FF550000"
+
+				}, {
+					context: context
+				})
+			});
 // Add the Layer with GPX Track
-			var lgpx = new OpenLayers.Layer.GML("GPX track", "get_gpx.php?gpx_url=<?php echo urlencode($_GET["gpx_url"]) ?>", {
-  format: OpenLayers.Format.GPX,
-  style: {strokeColor: "red", strokeWidth: 5, strokeOpacity: 0.6},
-  projection: new OpenLayers.Projection("EPSG:4326")
-});
-map.addLayer(lgpx);
+			var lgpx = new OpenLayers.Layer.Vector("GPX track", {
+				projection: new OpenLayers.Projection("EPSG:4326"),
+				strategies: [new OpenLayers.Strategy.Fixed()],
+				protocol: new OpenLayers.Protocol.HTTP({
+					url: "get_gpx.php?gpx_url=<?php echo urlencode($_GET["gpx_url"]) ?>",
+					format: new OpenLayers.Format.GPX()
+				}),
+				styleMap: gpxStyle,
+			});
+			map.addLayer(lgpx);
  
 //			var lonLat = new OpenLayers.LonLat(lon, lat).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
 //			var lonLat = lgpx.getDataExtent().getCenterLonLat();
