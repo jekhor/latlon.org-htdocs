@@ -82,9 +82,12 @@ body {
     font-size: 9pt;
 }
 
+#transtable {
+    border-collapse: collapse;
+}
+
 #transtable * {
     border: 1px solid darkgrey;
-    border-collapse: collapse;
     font-size: 8pt;
 }
 
