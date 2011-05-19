@@ -1,9 +1,67 @@
 var map;
 var mapnik;
 var bel;
+var vector;
 var brokenContentSize;
 
+var sketchSymbolizers = {
+    "Point": {
+      pointRadius: 4,
+      graphicName: "square",
+      fillColor: "white",
+      fillOpacity: 1,
+      strokeWidth: 1,
+      strokeOpacity: 1,
+      strokeColor: "#333333"
+    },
+    "Line": {
+      strokeWidth: 3,
+      strokeOpacity: 1,
+      strokeColor: "#666666",
+      strokeDashstyle: "dash"
+    },
+    "Polygon": {
+      strokeWidth: 2,
+      strokeOpacity: 1,
+      strokeColor: "#666666",
+      fillColor: "white",
+      fillOpacity: 0.3
+    }
+};
+
+var styleMap = new OpenLayers.StyleMap({
+    "default": new OpenLayers.Rule({symbolizer: sketchSymbolizers})
+});
+
+function handleMeasure(event)
+{
+  if (event.order==1) // LINEAR
+  {
+      var mydiv=document.getElementById("distance");
+      mydiv.style.display="inline";
+      mydiv.innerHTML=event.measure.toFixed(3) + " " + event.units;
+  }
+  else // POLYGON
+  {
+      var area = event.measure.toFixed(3) + " " + event.units;
+      var a = map.getControlsByClass('OpenLayers.Control.Measure');
+      var ctrl = a[0];
+      var length = (ctrl.getBestLength(event.geometry)[0]).toFixed(3) + " " + ctrl.getBestLength(event.geometry)[1];
+  }
+}
+
+function hideDistance(event) {
+  var mydiv=document.getElementById("distance");
+  mydiv.style.display="none";
+  mydiv.innerHTML="";
+}
+
+
 function init() {
+    var distanceDiv = document.createElement("div");
+    distanceDiv.id = "distance";
+    var body = document.getElementsByTagName("body")[0];
+    body.appendChild(distanceDiv);
     brokenContentSize = $("content").offsetWidth == 0;
     OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
     OpenLayers.Util.onImageLoadErrorColor = "transparent";
@@ -57,9 +115,38 @@ function init() {
     map = new OpenLayers.Map('map', options);
     mapnik = new OpenLayers.Layer.OSM();
     bel = new OpenLayers.Layer.OSM("Беларуская", "http://tile.latlon.org/tiles/${z}/${x}/${y}.png", {isBaseLayer: true,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize"});
+    vector = new OpenLayers.Layer.Vector("Editable Vectors");
 
+    map.addLayers([bel, mapnik, vector]);
 
-    map.addLayers([bel, mapnik]);
+    var MLinearCtrlOptions =
+    {
+        title: 'линейка',
+        displayUnits: 'm',
+        eventListeners:
+        {
+          'measure': handleMeasure,
+          'measurepartial': handleMeasure,
+          'deactivate': hideDistance
+        },
+        handlerOptions:
+        {
+          persist: true,
+          layerOptions: {styleMap: styleMap}
+        },
+        geodesic: true
+    };
+
+    var tb = new OpenLayers.Control.Panel(
+            {displayClass: 'olControlEditingToolbar'}
+    );
+
+    tb.addControls([
+        new OpenLayers.Control.Measure(OpenLayers.Handler.Path, MLinearCtrlOptions),
+        new OpenLayers.Control.Navigation()
+    ]);
+    map.addControl(tb);
+    tb.controls[1].activate();
 
     if (!map.getCenter()) {
         var lonlat, zoom;
