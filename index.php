@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="/css/style.css" type="text/css" />
         <link rel="stylesheet" href="/css/global.css" type="text/css" />
 
-        <script src="http://www.openlayers.org/api/OpenLayers.js" type="text/javascript"></script>
+        <script src="http://www.openlayers.org/dev/OpenLayers.js" type="text/javascript"></script>
         <script src="/js/lib.js" type="text/javascript"></script>
         <script src="/js/mini.js" type="text/javascript"></script>
     </head>

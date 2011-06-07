@@ -84,12 +84,12 @@ body {
 
 .olControlMeasureItemActive {
     background-image: url(/images/ruler.png) !important;
-    background-position: 0 -23px !important;
+    background-position: 0 -24px !important;
 }
 
 .olControlMeasureItemInactive {
     background-image: url(/images/ruler.png) !important;
-    background-position: 0 0 !important;
+    background-position: 0 -1px !important;
 }
 
 .olControlPermalink {
