@@ -80,6 +80,7 @@ body {
 
 .olControlEditingToolbar div {
     width: 25px !important;
+    height: 23px !important;
 }
 
 .olControlMeasureItemActive {
