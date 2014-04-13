@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="/css/style.css" type="text/css" />
         <link rel="stylesheet" href="/css/global.css" type="text/css" />
 
-        <script src="http://www.openlayers.org/api/OpenLayers.js" type="text/javascript"></script>
+        <script src="http://www.openlayers.org/api/2.10/OpenLayers.js" type="text/javascript"></script>
         <script type="text/javascript" src="/js/openstreetbugs.js"></script>
         <script src="/js/lib.js" type="text/javascript"></script>
         <script src="/js/click.js" type="text/javascript"></script>
@@ -28,5 +28,17 @@
             </div>
             <div id="map" class="smallmap" ></div>
         </div>
+<!-- Piwik --> 
+<script type="text/javascript">
+var pkBaseURL = (("https:" == document.location.protocol) ? "https://openstreetmap.by/piwik/" : "http://openstreetmap.by/piwik/");
+document.write(unescape("%3Cscript src='" + pkBaseURL + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script type="text/javascript">
+try {
+var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", 2);
+piwikTracker.trackPageView();
+piwikTracker.enableLinkTracking();
+} catch( err ) {}
+</script><noscript><p><img src="http://openstreetmap.by/piwik/piwik.php?idsite=2" style="border:0" alt="" /></p></noscript>
+<!-- End Piwik Tracking Code -->
     </body>
 </html>
