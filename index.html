@@ -20,13 +20,19 @@
 		 <script src="lib/leaflet.measurecontrol/leaflet.measurecontrol.js"></script>
 		 <script src="lib/leaflet-hash.js"></script>
 		 <script>
+
+var params = {};
+window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+	params[key] = value;
+});
+
 var map = L.map('map').setView([53.90313, 27.56813], 7);
 
 var latlon = L.tileLayer('http://tile.latlon.org/tiles/{z}/{x}/{y}.png', {
 		maxZoom: 18,
 		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
 		'Tiles: <a href="https://github.com/jekhor/belroad">Belroad</a> style'
-		}).addTo(map);
+		});
 
 var velo100 = L.tileLayer('http://tile.latlon.org/stranger/{z}/{x}/{y}.png', {
 		maxZoom: 18,
@@ -46,8 +52,48 @@ var baseLayers = {
 };
 
 L.control.layers(baseLayers).addTo(map);
-L.Control.measureControl().addTo(map);
-L.hash(map);
+
+var hashLayers = {
+	'L': latlon,
+	'C': velo100,
+	'G': genshtab
+};
+
+var control = L.Control.measureControl().addTo(map);
+
+var hash = L.hash(map);
+hash.formatHash = function(map, setLayer=null) {
+	var center = map.getCenter(),
+	zoom = map.getZoom(),
+	precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
+
+	var layers = "";
+	for (l in hashLayers) {
+		if (setLayer != null) {
+			if (hashLayers[l] == setLayer)
+				layers += l;
+		} else {
+			if (map.hasLayer(hashLayers[l]))
+				layers += l;
+		}
+	}
+
+	return "#" + [zoom,
+	center.lat.toFixed(precision),
+	center.lng.toFixed(precision)
+	].join("/") + "?layers=" + layers;
+};
+
+if (params.layers) {
+	for (var i = 0; i < params.layers.length; i++) {
+		hashLayers[params.layers[i]].addTo(map);
+	}
+} else {
+	latlon.addTo(map);
+}
+map.on('baselayerchange', function(e) {
+	location.replace(hash.formatHash(map, e.layer));;
+});
 		 </script>
 
 <!-- Piwik -->
