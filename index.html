@@ -62,14 +62,14 @@ var hashLayers = {
 var control = L.Control.measureControl().addTo(map);
 
 var hash = L.hash(map);
-hash.formatHash = function(map, setLayer=null) {
+hash.formatHash = function(map, setLayer) {
 	var center = map.getCenter(),
 	zoom = map.getZoom(),
 	precision = Math.max(0, Math.ceil(Math.log(zoom) / Math.LN2));
 
 	var layers = "";
 	for (l in hashLayers) {
-		if (setLayer != null) {
+		if (setLayer != undefined) {
 			if (hashLayers[l] == setLayer)
 				layers += l;
 		} else {
