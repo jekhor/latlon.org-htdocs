@@ -1,0 +1,25 @@
+#map { height: 100%; }
+html, body {
+	height: 100%;
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+
+#wrapper {
+	height: 100%;
+	width: 100%;
+	margin: auto;
+	position: relative;
+}
+
+#header {
+	height: 50px;
+}
+
+#container {
+	position: absolute;
+	bottom: 0;
+	top: 50px;
+	width: 100%;
+	overflow: auto;
+}
