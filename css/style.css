@@ -207,3 +207,9 @@ h3 {
     margin: 5pt;
     padding: 5pt;
 }
+
+#logout {
+    float: right;
+    padding: 6px;
+    right: 0;
+}

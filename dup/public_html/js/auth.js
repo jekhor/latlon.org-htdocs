@@ -1,0 +1,5 @@
+var Authentication = {};
+
+Authentication.Basic = {
+    
+};

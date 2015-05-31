@@ -1,7 +1,7 @@
 var map;
 var mapnik;
 var bel;
-var vector;
+var markers;
 var brokenContentSize;
 
 var sketchSymbolizers = {
@@ -114,10 +114,13 @@ function init() {
 
     map = new OpenLayers.Map('map', options);
     mapnik = new OpenLayers.Layer.OSM();
-    bel = new OpenLayers.Layer.OSM("Беларуская", "http://tile.latlon.org/tiles/${z}/${x}/${y}.png", {isBaseLayer: true,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize"});
-    vector = new OpenLayers.Layer.Vector("Editable Vectors");
+//    bel = new OpenLayers.Layer.OSM("Беларуская", "http://tile.latlon.org/tiles/${z}/${x}/${y}.png", {isBaseLayer: true,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize"});
+    br = new OpenLayers.Layer.OSM("Belroad", "http://tile.latlon.org/tiles/${z}/${x}/${y}.png", {isBaseLayer: true,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize"});
+    stranger = new OpenLayers.Layer.OSM("Чепецк.net", "http://tile.latlon.org/stranger/${z}/${x}/${y}.png", {isBaseLayer: true,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize"});
+    layerGenshtab = new OpenLayers.Layer.WMS("Genshtab 1 km", "http://ms.latlon.org/ms", {layers: "GS-100k-N-34,GS-100k-N-35,GS-100k-N-36"}, {projection: new OpenLayers.Projection("EPSG:3857")});
+    markers = new OpenLayers.Layer.Markers("Markers");
 
-    map.addLayers([bel, mapnik, vector]);
+    map.addLayers([br, stranger, mapnik, layerGenshtab, markers]);
 
     var MLinearCtrlOptions =
     {

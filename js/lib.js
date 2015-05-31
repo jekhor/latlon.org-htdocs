@@ -57,7 +57,7 @@ function scond(predicate, i, e) {
 
 function getStyle(element, style) {
     element = $(element);
-    style = style == 'float' ? 'cssFloat' : style.camelize();
+    style = style == 'float' ? 'cssFloat' : OpenLayers.String.camelize(style);
     var value = element.style[style];
     if (!value || value == 'auto') {
         var css;
@@ -134,6 +134,7 @@ function handleResize() {
     document.getElementById("map").style.height = (document.getElementById("content").offsetHeight - 2) + "px";
     document.getElementById("sidebar").style.height = (document.getElementById("content").offsetHeight - 2) + "px";
 
+    map.updateSize();
     map.setCenter(centre, zoom);
 }
 
@@ -141,4 +142,10 @@ function getMapExtent() {
     return map.getExtent().clone().transform(map.getProjectionObject(), epsg4326);
 }
 
-
+function supports_html5_storage() {
+    try {
+        return 'localStorage' in window && window['localStorage'] !== null;
+    } catch (e) {
+        return false;
+    }
+}

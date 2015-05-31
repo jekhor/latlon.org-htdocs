@@ -12,9 +12,9 @@
         }
     </style>
 
-    
+
     <script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
-    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <script src="http://www.openlayers.org/api/2.10/OpenLayers.js"></script>
     <script type="text/javascript">
 
         // make map available for easy debugging
@@ -215,7 +215,7 @@ new OpenLayers.Control.Permalink('sketchlink', 'http://latlon.org/sketch'),
 
             // create a vector layer for drawing
             vector = new OpenLayers.Layer.Vector("Editable Vectors");
-            
+
             map.addLayers([mapnik, bel, yasat, irs, yahoosat, hyb, vector]);
             var ls = new OpenLayers.Control.LayerSwitcher();
             map.addControl(ls);
@@ -314,7 +314,7 @@ edittb.addControls([MeasureLinearCtrl]);
             mydiv.style.display="none";
             mydiv.innerHTML="";
         }
- 
+
 
 
 function getSketchUrl(lay, wid){
@@ -363,7 +363,7 @@ Width:
         <SELECT id="wms-width" SIZE=1>
                 <OPTION value="300" selected>  300
                 <OPTION value="450">  450
-                <OPTION value="600">  600                
+                <OPTION value="600">  600
         </SELECT>
 </form>
 <input type="checkbox" id="noresize"> <label for="noresize">No resize</label><br />
@@ -388,17 +388,21 @@ document.getElementById('map_preview').innerHTML = 'Preview (scaled 300px):<br><
 </td>
 
 </table>
-
-
+<!-- Piwik -->
 <script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stat.komzpa.net/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
 </script>
-<script type="text/javascript">
-try {
-  var pageTracker = _gat._getTracker("UA-3696753-3");
-  pageTracker._trackPageview();
-  } catch(err) {}</script>
+<noscript><p><img src="//stat.komzpa.net/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
   </body>
 </html>
 

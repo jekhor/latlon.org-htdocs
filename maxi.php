@@ -12,11 +12,13 @@
         }
     </style>
 
-    
+
     <script src='http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAA4RJuqz7pcsqYdE-UgSNCLhTDHWCCDaHhpyCQHbdxzVfRMRQXlBSD1sB3MWEn0zedSC-AoQn7vamynw'></script>
     <script src="http://api.maps.yahoo.com/ajaxymap?v=3.0&appid=euzuro-openlayers"></script>
 
-    <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+    <script src="proj4js/proj4js-compressed.js"></script>
+    <script src="http://www.openlayers.org/api/2.11/OpenLayers.js"></script>
+
     <script type="text/javascript">
 
         // make map available for easy debugging
@@ -79,6 +81,7 @@
       }
     }
 function init (){
+		Proj4js.defs["EPSG:3857"]= "+title= Google Mercator EPSG:3857 +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs";
             var options = {
                 projection: new OpenLayers.Projection("EPSG:900913"),
                 displayProjection: new OpenLayers.Projection("EPSG:4326"),
@@ -127,13 +130,19 @@ new OpenLayers.Control.Permalink('sketchlink', 'http://latlon.org/sketch'),
             var yasat = new OpenLayers.Layer.TMS("yandex.ru retiling", "http://wms.latlon.org/?request=GetTile&layers=yasat&", {  numZoomLevels: 19,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
 
             //var gshtab = new OpenLayers.Layer.TMS("BY Genshtab 100k", "http://wms.play.latlon.org/?request=GetTile&layers=gshtab&", {  numZoomLevels: 19,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
-            var irs = new OpenLayers.Layer.TMS("kosmosnimki.ru IRS retiling + yahoo", "http://wms.latlon.org/?request=GetTile&layers=yhsat,irs&force=noblend&", {  numZoomLevels: 16,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
-            var spot_by = new OpenLayers.Layer.TMS("kosmosnimki.ru SPOT (Belarus)", "http://wms.latlon.org/?request=GetTile&layers=spot&", {  numZoomLevels: 17,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
-	    var layerGenshtab = new OpenLayers.Layer.TMS("Genshtab 1 km", "http://wms.latlon.org/?request=GetTile&layers=gshtab&", {  numZoomLevels: 18,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true, visibility: true });
-            var hyb = new OpenLayers.Layer.TMS("MapSurfer.NET OSM Hybrid", "http://tiles3.mapsurfer.net/tms_h.ashx?", {  numZoomLevels: 19,  isBaseLayer: false,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true, visibility: true });
-            var pt = new OpenLayers.Layer.TMS("Public Transport", "http://tile.latlon.org/pt/", {  numZoomLevels: 18,  isBaseLayer: false,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true, visibility: true });
-            var tc = new OpenLayers.Layer.TMS("Traffic Calming", "http://osmosnimki.ru/cops/", {  numZoomLevels: 19,  isBaseLayer: false,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true, visibility: false });
-            var belsn = new OpenLayers.Layer.OSM("Беларуская (kosmosnimki)", "http://osmosnimki.ru/kosmo-be/${z}/${x}/${y}.png", {isBaseLayer: true,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize"});
+            var irs = new OpenLayers.Layer.TMS("kosmosnimki.ru IRS + SPOT", "http://wms.latlon.org/?request=GetTile&layers=irs,spot&force=noblend&", {  numZoomLevels: 16,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
+//            var spot_by = new OpenLayers.Layer.TMS("kosmosnimki.ru SPOT (Belarus)", "http://wms.latlon.org/?request=GetTile&layers=spot&", {  numZoomLevels: 17,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true });
+	    //var layerGenshtab = new OpenLayers.Layer.TMS("Genshtab 1 km", "http://wms.latlon.org/?request=GetTile&layers=gshtab&", {  numZoomLevels: 18,  isBaseLayer: true,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true, visibility: true });
+            var layerGenshtab = new OpenLayers.Layer.WMS("Genshtab 1 km", "http://ms.latlon.org/ms", {layers: "GS-100k-N-34,GS-100k-N-35,GS-100k-N-36"}, {projection: new OpenLayers.Projection("EPSG:3857")});
+            var latlonsat = new OpenLayers.Layer.WMS("Latlon.org imagery", "http://dev.latlon.org/cgi-bin/ms", {layers: "plane,sat,baloon"}, {numZoomLevels: 19, projection: new OpenLayers.Projection("EPSG:3857"),displayProjection: new OpenLayers.Projection("EPSG:4326"), sphericalMercator: true});
+//            var hyb = new OpenLayers.Layer.TMS("MapSurfer.NET OSM Hybrid", "http://tiles3.mapsurfer.net/tms_h.ashx?", {  numZoomLevels: 20,  isBaseLayer: false,  type: 'png', getURL: osm_getTileURL, displayOutsideMaxExtent: true, visibility: false });
+//            var pt = new OpenLayers.Layer.TMS("Public Transport", "http://tile.latlon.org/pt/", {  numZoomLevels: 18,  isBaseLayer: false,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true, visibility: true });
+//            var tc = new OpenLayers.Layer.TMS("Traffic Calming", "http://e.tile.osmosnimki.ru/cops/", {  numZoomLevels: 19,  isBaseLayer: false,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true, visibility: false });
+            var kshyb = new OpenLayers.Layer.TMS("kosmosnimki hybrid", "http://e.tile.osmosnimki.ru/hyb-be/", {  numZoomLevels: 19,  isBaseLayer: false,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true, visibility: true });
+
+            var osmo = new OpenLayers.Layer.OSM("Osmosnimki", "http://e.tile.osmosnimki.ru/kosmo/${z}/${x}/${y}.png", {isBaseLayer: true,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize"});
+            var belsn = new OpenLayers.Layer.OSM("Беларуская (kosmosnimki)", "http://e.tile.osmosnimki.ru/kosmo-be/${z}/${x}/${y}.png", {isBaseLayer: true,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize"});
+            var ensn = new OpenLayers.Layer.OSM("English (kosmosnimki)", "http://e.tile.osmosnimki.ru/kosmo-en/${z}/${x}/${y}.png", {isBaseLayer: true,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize"});
             var mq = new OpenLayers.Layer.OSM("MapQuest OSM", "http://otile1.mqcdn.com/tiles/1.0.0/osm/${z}/${x}/${y}.png", {isBaseLayer: true,  type: 'png', displayOutsideMaxExtent: true, transitionEffect: "resize"});
 
             //var opnv = new OpenLayers.Layer.TMS("öpnvkarte.de", "http://tile.xn--pnvkarte-m4a.de/tilegen/", {   isBaseLayer: true,  type: 'png', getURL: osmt_getTileURL, displayOutsideMaxExtent: true});
@@ -146,7 +155,8 @@ new OpenLayers.Control.Permalink('sketchlink', 'http://latlon.org/sketch'),
             // create a vector layer for drawing
             //var vector = new OpenLayers.Layer.Vector("Editable Vectors");
 
-            map.addLayers([gsat, yasat, irs, spot_by, bel, layerGenshtab, navitel, yahoosat, opnv, mapnik, gmap, ghyb, road, navdebug, pt, tc, belsn, mq, hyb]);
+//            map.addLayers([gsat, yasat, irs, bel, layerGenshtab, navitel, yahoosat, opnv, mapnik, gmap, ghyb, road, navdebug, pt, tc, osmo, belsn, ensn, mq, hyb, latlonsat, kshyb]);
+            map.addLayers([gsat, yasat, irs, bel, layerGenshtab, navitel, yahoosat, opnv, mapnik, gmap, ghyb, road, navdebug,  osmo, belsn, ensn, mq, latlonsat, kshyb]);
             var ls = new OpenLayers.Control.LayerSwitcher();
             map.addControl(ls);
             ls.maximizeControl();
@@ -171,19 +181,25 @@ new OpenLayers.Control.Permalink('sketchlink', 'http://latlon.org/sketch'),
     <td height=30><?include ("top.inc.php"); ?></td>
   <tr>
     <td><div id="map" style="width:100%; height:100%; overflow:hidden;"></div></td>
-    
+
 </table>
 
 
+<!-- Piwik -->
 <script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  var _paq = _paq || [];
+  _paq.push(['trackPageView']);
+  _paq.push(['enableLinkTracking']);
+  (function() {
+    var u="//stat.komzpa.net/";
+    _paq.push(['setTrackerUrl', u+'piwik.php']);
+    _paq.push(['setSiteId', 1]);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.type='text/javascript'; g.async=true; g.defer=true; g.src=u+'piwik.js'; s.parentNode.insertBefore(g,s);
+  })();
 </script>
-<script type="text/javascript">
-try {
-  var pageTracker = _gat._getTracker("UA-3696753-3");
-  pageTracker._trackPageview();
-  } catch(err) {}</script>
+<noscript><p><img src="//stat.komzpa.net/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
   </body>
 </html>
 
