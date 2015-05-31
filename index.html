@@ -85,9 +85,15 @@ hash.formatHash = function(map, setLayer=null) {
 };
 
 if (params.layers) {
+	var added = false;
 	for (var i = 0; i < params.layers.length; i++) {
-		hashLayers[params.layers[i]].addTo(map);
+		if (hashLayers[params.layers[i]] != undefined) {
+			hashLayers[params.layers[i]].addTo(map);
+			added = true;
+		}
 	}
+	if (!added)
+		latlon.addTo(map);
 } else {
 	latlon.addTo(map);
 }
