@@ -6,6 +6,7 @@
 		 <link rel="stylesheet" href="lib/leaflet.draw/leaflet.draw.css"/>
 		 <link rel="stylesheet" href="lib/leaflet.measurecontrol/leaflet.measurecontrol.css"/>
 		 <link rel="stylesheet" href="css/main.css" />
+		 <link rel="stylesheet" href="lib/Leaflet.FileLayer/Font-Awesome/css/font-awesome.min.css" />
 	</head>
 	<body>
 		<div id="wrapper">
@@ -20,6 +21,9 @@
 		 <script src="lib/leaflet.draw/leaflet.draw.js"></script>
 		 <script src="lib/leaflet.measurecontrol/leaflet.measurecontrol.js"></script>
 		 <script src="lib/leaflet-hash.js"></script>
+		 <script src="lib/Leaflet.FileLayer/leaflet.filelayer.js"></script>
+		 <script src="lib/Leaflet.FileLayer/togeojson/togeojson.js"></script>
+
 		 <script>
 
 var params = {};
@@ -52,7 +56,7 @@ var baseLayers = {
 	"Генштаб, 1км": genshtab
 };
 
-L.control.layers(baseLayers).addTo(map);
+var layersCtl = L.control.layers(baseLayers).addTo(map);
 
 var hashLayers = {
 	'L': latlon,
@@ -101,6 +105,39 @@ if (params.layers) {
 map.on('baselayerchange', function(e) {
 	location.replace(hash.formatHash(map, e.layer));;
 });
+
+
+var style = { opacity: 0.5, color:'red' };
+
+L.Control.FileLayerLoad.LABEL = '<i class="fa fa-folder-open"></i>';
+var fileLayerCtl = L.Control.fileLayerLoad({
+	// See http://leafletjs.com/reference.html#geojson-options
+	layerOptions: {
+		style: style,
+		pointToLayer: function (data, latlng) {
+			return L.circleMarker(latlng, {style: style});
+		}
+	},
+	// Add to map after loading (default: true) ?
+	addToMap: true,
+	// File size limit in kb (default: 1024) ?
+	fileSizeLimit: 16384,
+	fitBounds: true,
+	// Restrict accepted file formats (default: .geojson, .kml, and .gpx) ?
+	formats: [
+		'.gpx',
+		'.geojson',
+		'.kml'
+	]
+}).addTo(map);
+
+
+fileLayerCtl.loader.on('data:loaded', function (e) {
+	// Add to map layer switcher
+	layersCtl.addOverlay(e.layer, e.filename);
+});
+
+
 		 </script>
 
 <!-- Piwik -->
