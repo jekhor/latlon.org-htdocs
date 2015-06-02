@@ -1,0 +1,3 @@
+[submodule "lib/Leaflet.FileLayer"]
+	path = lib/Leaflet.FileLayer
+	url = https://github.com/makinacorpus/Leaflet.FileLayer.git
