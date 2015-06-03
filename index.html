@@ -115,7 +115,9 @@ var fileLayerCtl = L.Control.fileLayerLoad({
 	layerOptions: {
 		style: style,
 		pointToLayer: function (data, latlng) {
-			return L.circleMarker(latlng, {style: style});
+			var layer =  L.circleMarker(latlng, {style: style});
+			layer.bindPopup(data.properties.name);
+			return layer;
 		}
 	},
 	// Add to map after loading (default: true) ?
