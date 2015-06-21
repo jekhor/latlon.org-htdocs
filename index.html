@@ -12,22 +12,29 @@
 		<div id="wrapper">
 		<div id="header">
 			<img src="images/cat.png"/>
+			<form id="gpxForm">
+				<label for="gpxURL">Загрузить трек с URL:</label>
+				<input type="text" id="gpxURL" name="gpxURL"/>
+				<input type="submit" value="Загрузить"/>
+			</form>
 		</div>
 		<div id="container">
 		 <div id="map"></div>
 		</div>
 		</div>
+		 <script src="lib/jquery-2.1.4.min.js"></script>
 		 <script src="http://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.3/leaflet.js"></script>
 		 <script src="lib/leaflet.draw/leaflet.draw.js"></script>
 		 <script src="lib/leaflet.measurecontrol/leaflet.measurecontrol.js"></script>
 		 <script src="lib/leaflet-hash.js"></script>
 		 <script src="lib/Leaflet.FileLayer/leaflet.filelayer.js"></script>
 		 <script src="lib/Leaflet.FileLayer/togeojson/togeojson.js"></script>
+		 <script src="lib/leaflet-omnivore.min.js"></script>
 
 		 <script>
 
 var params = {};
-window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+window.location.href.replace(/[?&]+([^=&]+)=([^&#]*)/gi, function(m, key, value) {
 	params[key] = value;
 });
 
@@ -117,6 +124,25 @@ if (params.layers) {
 } else {
 	latlon.addTo(map);
 }
+
+function loadGpx(url) {
+
+	if (!url)
+		return;
+
+	var proxyUrl = '/cgi/proxy.cgi';
+	var gpxLayer = omnivore.gpx(proxyUrl + '?url=' + encodeURIComponent(url))
+		.on('ready', function() {
+			map.fitBounds(gpxLayer.getBounds());
+		})
+	.addTo(map);
+
+};
+
+if (params.gpxUrl) {
+	loadGpx(decodeURIComponent(params.gpxUrl));
+}
+
 map.on('baselayerchange', function(e) {
 	location.replace(hash.formatHash(map, e.layer));;
 });
@@ -154,6 +180,15 @@ fileLayerCtl.loader.on('data:loaded', function (e) {
 	layersCtl.addOverlay(e.layer, e.filename);
 });
 
+$(document).ready(function() {
+	$('#gpxForm').submit(function() {
+		var gpxUrl = $('#gpxURL').val();
+
+		loadGpx(gpxUrl);
+
+		return false;
+	});
+});
 
 		 </script>
 

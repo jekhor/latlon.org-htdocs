@@ -23,3 +23,13 @@ html, body {
 	width: 100%;
 	overflow: auto;
 }
+
+#header img {
+	float: left;
+	margin-right: 10px;
+}
+
+#header form {
+	float: right;
+	margin-top: 15px;
+}
