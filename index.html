@@ -130,7 +130,7 @@ function loadGpx(url) {
 	if (!url)
 		return;
 
-	var proxyUrl = '/cgi/proxy.cgi';
+	var proxyUrl = '/proxy.py';
 	var gpxLayer = omnivore.gpx(proxyUrl + '?url=' + encodeURIComponent(url))
 		.on('ready', function() {
 			map.fitBounds(gpxLayer.getBounds());
