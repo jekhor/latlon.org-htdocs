@@ -55,11 +55,18 @@ var genshtab = L.tileLayer.wms("http://ms.latlon.org/ms", {
 	format: 'image/png'
 });
 
+var rkka50k = L.tileLayer('http://orda.of.by/.tiles/rkka/Z{z}/{y}/{x}.jpg', {
+		maxZoom: 14,
+		attribution: '<a href="http://orda.of.by/">orda.of.by</a>'
+		});
+
+
 var baseLayers = {
 	"LatLon": latlon,
 	"чепецк.net": velo100,
 	"OSM Mapnik": osm,
-	"Генштаб, 1км": genshtab
+	"Генштаб, 1км": genshtab,
+	"РККА, 1:50000": rkka50k
 };
 
 var layersCtl = L.control.layers(baseLayers).addTo(map);
@@ -68,7 +75,8 @@ var hashLayers = {
 	'L': latlon,
 	'C': velo100,
 	'O': osm,
-	'G': genshtab
+	'G': genshtab,
+	'R': rkka50k
 };
 
 var control = L.Control.measureControl().addTo(map);
