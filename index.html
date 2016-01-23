@@ -62,10 +62,6 @@ var genshtab = L.tileLayer.wms("http://ms.latlon.org/ms", {
 	format: 'image/png'
 });
 
-var genshtab_t = L.tileLayer("http://localhost:8080/tiles/gs/webmercator/{z}/{x}/{y}.png", {
-	maxZoom: 13
-});
-
 var rkka50k = L.tileLayer('http://orda.of.by/.tiles/rkka/Z{z}/{y}/{x}.jpg', {
 		maxZoom: 14,
 		attribution: '<a href="http://orda.of.by/">orda.of.by</a>'
@@ -94,7 +90,6 @@ var baseLayers = {
 	"чепецк.net": velo100,
 	"OSM Mapnik": osm,
 	"Генштаб, 1км": genshtab,
-	"Генштаб, 1км (TMS)": genshtab_t,
 	"РККА, 1:50000": rkka50k,
 	"ЗИС Витебская обл.": zis_vitebsk,
 	"ЗИС Минская обл.": zis_minsk
@@ -111,7 +106,6 @@ var hashLayers = {
 	'C': velo100,
 	'O': osm,
 	'G': genshtab,
-	'T': genshtab_t,
 	'R': rkka50k,
 	'V': zis_vitebsk,
 	'M': zis_minsk,
