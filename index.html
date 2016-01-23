@@ -67,13 +67,29 @@ var rkka50k = L.tileLayer('http://orda.of.by/.tiles/rkka/Z{z}/{y}/{x}.jpg', {
 		attribution: '<a href="http://orda.of.by/">orda.of.by</a>'
 		});
 
+var zis_vitebsk = L.tileLayer('http://vitebsk.gismap.by/ArcGIS/rest/services/WGS/Land_Vitebsk_public/MapServer/tile/{z}/{y}/{x}', {
+		maxZoom: 18,
+		minZoom: 15,
+		attribution: '<a href="http://gismap.by/">Геопортал ЗИС</a>'
+		});
+
+var zis_minsk = L.tileLayer('http://gismap.by/arcgis/rest/services/Public/Land_Minsk_public/MapServer/tile/{z}/{y}/{x}', {
+		minZoom: 14,
+		maxZoom: 18,
+		attribution: '<a href="http://gismap.by/">Геопортал ЗИС</a>'
+		});
+
+
+
 
 var baseLayers = {
 	"LatLon": latlon,
 	"чепецк.net": velo100,
 	"OSM Mapnik": osm,
 	"Генштаб, 1км": genshtab,
-	"РККА, 1:50000": rkka50k
+	"РККА, 1:50000": rkka50k,
+	"ЗИС Витебская обл.": zis_vitebsk,
+	"ЗИС Минская обл.": zis_minsk
 };
 
 var layersCtl = L.control.layers(baseLayers).addTo(map);
@@ -83,7 +99,9 @@ var hashLayers = {
 	'C': velo100,
 	'O': osm,
 	'G': genshtab,
-	'R': rkka50k
+	'R': rkka50k,
+	'V': zis_vitebsk,
+	'M': zis_minsk
 };
 
 var control = L.Control.measureControl().addTo(map);
