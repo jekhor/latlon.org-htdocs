@@ -63,7 +63,8 @@ var genshtab = L.tileLayer.wms("http://ms.latlon.org/ms", {
 });
 
 var rkka50k = L.tileLayer('http://orda.of.by/.tiles/rkka/Z{z}/{y}/{x}.jpg', {
-		maxZoom: 14,
+		maxNativeZoom: 14,
+		maxZoom: 18,
 		attribution: '<a href="http://orda.of.by/">orda.of.by</a>'
 		});
 
@@ -85,6 +86,13 @@ var lots_minsk = L.tileLayer('http://gismap.by/arcgis/rest/services/Public/Uchas
 		attribution: '<a href="http://gismap.by/">Геопортал ЗИС</a>'
 		});
 
+var myad = L.tileLayer('http://gismap.by/arcgis/rest/services/WMS/Myadelski/MapServer/tile/{z}/{y}/{x}', {
+		minZoom: 0,
+		maxZoom: 19,
+		attribution: '<a href="http://gismap.by/">Геопортал ЗИС</a>'
+		});
+
+
 var baseLayers = {
 	"LatLon": latlon,
 	"чепецк.net": velo100,
@@ -92,7 +100,9 @@ var baseLayers = {
 	"Генштаб, 1км": genshtab,
 	"РККА, 1:50000": rkka50k,
 	"ЗИС Витебская обл.": zis_vitebsk,
-	"ЗИС Минская обл.": zis_minsk
+	"ЗИС Минская обл.": zis_minsk,
+	"WMS Мядельский район": myad
+
 };
 
 var overlays = {
