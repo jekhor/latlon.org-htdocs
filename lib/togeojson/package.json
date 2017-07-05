@@ -1,0 +1,168 @@
+{
+  "name": "togeojson",
+  "version": "0.16.0",
+  "description": "convert KML and GPX to GeoJSON",
+  "main": "togeojson.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "eslint togeojson.js && tape test/*.js",
+    "cov": "istanbul cover test/index.js && coveralls < ./coverage/lcov.info",
+    "browser": "browserify -t brfs test/index.js > test/bundle.js"
+  },
+  "devDependencies": {
+    "brfs": "~1.4.3",
+    "coveralls": "~2.11.12",
+    "eslint": "^3.3.0",
+    "glob": "^7.0.5",
+    "istanbul": "~0.4.4",
+    "tape": "~4.6.0"
+  },
+  "bin": {
+    "togeojson": "togeojson"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mapbox/togeojson.git"
+  },
+  "browser": {
+    "xmldom": false
+  },
+  "browserify": {
+    "transform": [
+      "brfs"
+    ]
+  },
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "xmldom": "~0.1.19",
+    "concat-stream": "~1.5.1",
+    "minimist": "1.2.0"
+  },
+  "keywords": [
+    "kml",
+    "geojson",
+    "gpx",
+    "geo",
+    "parser",
+    "formatter",
+    "input",
+    "leaflet",
+    "maps"
+  ],
+  "gitHead": "9d18acfd0f142386e5d858bce50cc9f34867de66",
+  "bugs": {
+    "url": "https://github.com/mapbox/togeojson/issues"
+  },
+  "homepage": "https://github.com/mapbox/togeojson#readme",
+  "_id": "togeojson@0.16.0",
+  "_shasum": "ab5729e4f8c9920e6da5f08fd82490a1d16aca6d",
+  "_from": "togeojson@",
+  "_npmVersion": "2.15.9",
+  "_nodeVersion": "4.6.0",
+  "_npmUser": {
+    "name": "tmcw",
+    "email": "tom@macwright.org"
+  },
+  "dist": {
+    "shasum": "ab5729e4f8c9920e6da5f08fd82490a1d16aca6d",
+    "tarball": "https://registry.npmjs.org/togeojson/-/togeojson-0.16.0.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "aaronlidman",
+      "email": "aaronlidman@gmail.com"
+    },
+    {
+      "name": "ajashton",
+      "email": "aj.ashton@gmail.com"
+    },
+    {
+      "name": "ansis",
+      "email": "ansis.brammanis@gmail.com"
+    },
+    {
+      "name": "camilleanne",
+      "email": "camille@mapbox.com"
+    },
+    {
+      "name": "dthompson",
+      "email": "dthompson@gmail.com"
+    },
+    {
+      "name": "gretacb",
+      "email": "carol@mapbox.com"
+    },
+    {
+      "name": "ianshward",
+      "email": "ian@mapbox.com"
+    },
+    {
+      "name": "ingalls",
+      "email": "nicholas.ingalls@gmail.com"
+    },
+    {
+      "name": "jfirebaugh",
+      "email": "john.firebaugh@gmail.com"
+    },
+    {
+      "name": "kkaefer",
+      "email": "kkaefer@gmail.com"
+    },
+    {
+      "name": "lxbarth",
+      "email": "alex@mapbox.com"
+    },
+    {
+      "name": "mapbox-admin",
+      "email": "accounts@mapbox.com"
+    },
+    {
+      "name": "miccolis",
+      "email": "jeff@miccolis.net"
+    },
+    {
+      "name": "mikemorris",
+      "email": "michael.patrick.morris@gmail.com"
+    },
+    {
+      "name": "morganherlocker",
+      "email": "morgan.herlocker@gmail.com"
+    },
+    {
+      "name": "mourner",
+      "email": "agafonkin@gmail.com"
+    },
+    {
+      "name": "springmeyer",
+      "email": "dane@mapbox.com"
+    },
+    {
+      "name": "themarex",
+      "email": "patrick@mapbox.com"
+    },
+    {
+      "name": "tmcw",
+      "email": "tom@macwright.org"
+    },
+    {
+      "name": "tristen",
+      "email": "tristen.brown@gmail.com"
+    },
+    {
+      "name": "willwhite",
+      "email": "will@mapbox.com"
+    },
+    {
+      "name": "yhahn",
+      "email": "young@mapbox.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/togeojson-0.16.0.tgz_1476811293816_0.38626666460186243"
+  },
+  "deprecated": "This module has moved: please install @mapbox/togeojson instead",
+  "_resolved": "https://registry.npmjs.org/togeojson/-/togeojson-0.16.0.tgz"
+}
