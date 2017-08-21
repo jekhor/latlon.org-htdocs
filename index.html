@@ -145,6 +145,7 @@ var baseLayers = {
 var globusGroup = L.markerClusterGroup({
 	showCoverageOnHover: false,
 	maxClusterRadius: 50,
+	disableClusteringAtZoom: 12,
 	iconCreateFunction: function(cluster) {
 		var childCount = cluster.getChildCount();
 
